@@ -15,6 +15,8 @@ import Client from "@notionhq/client/build/src/Client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 interface Env {
 	NOTION_API_KEY: string;
+	ATTENDANCE_KEY: string;
+	MEMBER_KEY: string;
 }
 
 export default {
@@ -39,7 +41,7 @@ export default {
 
 		// get data from attendance db
 		const response = await notion.dataSources.query({
-			data_source_id: 'aef02ce3-f819-4013-a2a4-ae2ec9a3698c', // ID for attendance Data Source
+			data_source_id: env.ATTENDANCE_KEY, // ID for attendance Data Source
 			filter_properties: ['Email'], // only what we actually read
 			filter: {
 				property: 'Member',
@@ -83,7 +85,7 @@ export default {
 			const chunk = uniqueEmails.slice(i, i + CHUNK_SIZE); // we take 50 emails and start with those
 
 			const memberResponse = await notion.dataSources.query({
-				data_source_id: 'fffd7b6b-06f3-810a-ae68-000b6c469340', // ID for Members' DB
+				data_source_id: env.MEMBER_KEY, // ID for Members' DB
 				filter_properties: ['Email'],
 				filter: {
 					or: chunk.map((email) => ({ //checks multiple emails identities at once and finds the match
