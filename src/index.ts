@@ -12,24 +12,14 @@
  */
 
 import Client from "@notionhq/client/build/src/Client";
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 interface Env {
 	NOTION_API_KEY: string;
 	ATTENDANCE_KEY: string;
 	MEMBER_KEY: string;
 }
 
-export default {
-
-	/*async scheduled (
-		controller: ScheduledController, 
-		env: Env,
-		ctx: ExecutionContext) {
-			console.log("Scheduled event fired at " + new Date(controller.scheduledTime).toISOString());
-	},*/
-
-	async fetch(request, env, ctx): Promise<Response> {
-		const notion = new Client({ auth: env.NOTION_API_KEY, dangerouslyAllowBrowser: true });
+async function LinkDBs(env: Env) {
+	const notion = new Client({ auth: env.NOTION_API_KEY, dangerouslyAllowBrowser: true });
 
 		/*
 			- Get attendance data (get all where 'Member' is empty) [CHECK]
@@ -151,5 +141,22 @@ export default {
 			results: update_results,
 		});
 
+}
+
+export default {
+
+	async scheduled (
+		controller: ScheduledController, 
+		env: Env,
+		ctx: ExecutionContext) {
+			console.log("Scheduled event fired at " + new Date(controller.scheduledTime).toISOString());
+			const response = await LinkDBs(env);
+			console.log("LinkDBs response: ", await response.text());
 	},
+
+	async fetch (request, env, ctx): Promise<Response> {
+		const response = await LinkDBs(env);
+		return Response.json(response);
+	}
+
 } satisfies ExportedHandler<Env>;
