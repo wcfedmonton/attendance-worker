@@ -12,7 +12,7 @@
 	},
 	"upload_source_maps": true,
 	"triggers": {
-		"crons": ["30 18 * * *"] // Every Sunday at 6:00 AM UTC, so 12 midnight local time
+		"crons": ["5 * * * *"] // Every Sunday at 6:00 AM UTC, so 12 midnight local time
 	},
 	/**
 	 * Smart Placement
