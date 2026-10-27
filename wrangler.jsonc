@@ -14,6 +14,10 @@
 	"triggers": {
 		"crons": ["5 * * * *"] // Every Sunday at 6:00 AM UTC, so 12 midnight local time
 	},
+	"vars": {
+		"ATTENDANCE_KEY": "aef02ce3-f819-4013-a2a4-ae2ec9a3698c",
+		"MEMBER_KEY": "fffd7b6b-06f3-810a-ae68-000b6c469340"
+	},
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
