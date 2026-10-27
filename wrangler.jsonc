@@ -12,7 +12,7 @@
 	},
 	"upload_source_maps": true,
 	"triggers": {
-		"crons": ["5 * * * *"] // Every Sunday at 6:00 AM UTC, so 12 midnight local time
+		"crons": ["0 6 * * SUN"] // Every Sunday at 6:00 AM UTC, so 12 midnight local time
 	},
 	"vars": {
 		"ATTENDANCE_KEY": "aef02ce3-f819-4013-a2a4-ae2ec9a3698c",
